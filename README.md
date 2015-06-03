@@ -56,7 +56,17 @@ $ sudo apt-get install mesa-utils
 $ sudo apt-get install libglw1-mesa-dev
 ```
 
-Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_32-bit folder.
+> If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw].
+
+>`libglw1-mesa-dev` was installed for getting `libGLw*` files.
+But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested(see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev` and it worked. If you encounter any problem with this library, use the included library files(in `libGLw.tar.gz`) instead.
+
+
+
+Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_32-bit folder. 
+
+>JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
+
 ```shell
 $ cd [DOWNLOAD_DIR]
 $ mkdir Sensable_Phantom_libs && tar -xvf Sensable_Phantom_libs.tar.gz -C Sensable_Phantom_libs
@@ -91,6 +101,7 @@ If you are using Ubuntu version of 11.04 or higher, you might see this error mes
 $ /usr/sbin/PHANToMConfiguration
 /usr/sbin/PHANToMConfiguration: error while loading shared libraries: libraw1394.so.8: cannot open shared object file: No such file or directory
 ```
+
 
 To solve this, create symbolic link for libraw1394.so.8.
 ```shell
@@ -203,19 +214,26 @@ Excepting the button, everything(encoders, gimbal encoders, force feedback) was 
 ##Test code
 >comming soon...
 
+##Installing Open Haptics
+>comming soon...
+
 ##Miscellaneous
 * Phantom Device Driver library
     >The PHANTOM Device Driver library is built as a shared object and is installed in
- **/usr/lib/libPHANToMIO.so **
+ **/usr/lib/libPHANToMIO.so**
 
 * Phantom Applications 
     >Administrative applications are installed in **/usr/sbin**
 
 * Phantom Configuration Files 
     >The default directory for configuration files is
- **/etc/SensAble/PHANToMDeviceDrivers **
+ **/etc/SensAble/PHANToMDeviceDrivers**
 
+* System Language
 
+    >If your system language is not English, you have to prefix a flag `LANG=en_us`.
+    >So when you run configuration program, you have to type `LANG=en_us /usr/sbin/PHANToMConfiguration`.
+    >When running test program, you have to type `LANG=en_us /usr/sbin/PHANToMTest`.
 
 ##References
 >comming soon...
@@ -225,7 +243,9 @@ Excepting the button, everything(encoders, gimbal encoders, force feedback) was 
 [Sensable DSC]:http://dsc.sensable.com/3dtouch/openhaptics_academic_linux/index.asp
 [PDD and OH Installation Guide For Linux]:http://dsc.sensable.com/datafiles/3dtouch/HW_userguide_Linux.pdf
 [what is link?]:http://www.computerhope.com/unix/uln.htm
-
+[Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]:http://robotica.unileon.es/mediawiki/index.php/Alvaro-RV-HAPTICROS01
+[DSC_forum_JUJU_PDD]:http://dsc.sensable.com/forum/topic.asp?TOPIC_ID=1283
+[DSC_forum_libGLw]:http://dsc.sensable.com/forum/topic.asp?TOPIC_ID=1241
 
 [Sensable_Phantom_libs.tar.gz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/Sensable_Phantom_libs.tar.gz
 
