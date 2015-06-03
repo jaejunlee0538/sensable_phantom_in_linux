@@ -214,10 +214,10 @@ Excepting the button, everything(encoders, gimbal encoders, force feedback) was 
 
 [Sensable_Phantom_libs.tar.gz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/Sensable_Phantom_libs.tar.gz
 
-[image_bios_epp_setup]:http://www.veryicon.com/icon/ico/Animal/Cat%20Force/cat%20sleep.ico
-[image_omni_configuration]:http://emojipedia.org/wp-content/uploads/2014/04/1f408-google-android.png
-[image_omni_test]:http://emojipedia.org/wp-content/uploads/2014/04/1f408-google-android.png
-[image_omni_box_test]:http://emojipedia.org/wp-content/uploads/2014/04/1f431-google-android.png
-[image_premium_1.5_configuration]:http://emojipedia.org/wp-content/uploads/2014/04/1f431-google-android.png
-[image_premium_1.5_test]:http://emojipedia.org/wp-content/uploads/2014/04/1f431-google-android.png
-[image_premium_1.5_box_test]:http://emojipedia.org/wp-content/uploads/2014/04/1f431-google-android.png
+[image_bios_epp_setup]:http://emojipedia.org/wp-content/uploads/2014/04/1f408-google-android.png
+[image_omni_configuration]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_config.png
+[image_omni_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_test.png
+[image_omni_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_box_test.png
+[image_premium_1.5_configuration]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_config.png
+[image_premium_1.5_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_test.png
+[image_premium_1.5_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_box_test.png
