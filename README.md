@@ -2,12 +2,27 @@
 >comming soon...
 
 ##Tested System Environments 
-|       |Specification                              |
-|-------|-----------------------------------------  |
-|CPU    |Intel i5-4690K CPU 3.50GHz x 4             |
-|Memory |16 GB                                      |
-|GPU    |Gallium 0.4 on NV92                        |
-|OS     | Ubuntu 14.04 32bit LTS 3.16.0-38-generic  |
+
+#### System Specification
+
+|           |Specification                              |
+|-------    |-----------------------------------------  |
+|CPU        |Intel i5-4690K CPU 3.50GHz x 4             |
+|Memory     |16 GB                                      |
+|GPU        |Gallium 0.4 on NV92                        |
+|MainBoard  |GIGABYTE GA-P85-D3                         |
+|OS         | Ubuntu 14.04 32bit LTS 3.16.0-38-generic  |
+
+
+####Device Compatibility
+
+|                           |Omni(1394)|Premium 1.5A(Parport)   | Premium 3.0 6DOF(Parport)|
+|---------------------------|:-------:  |:--------------------:  |:------------------------:|
+|NEXT-1394NEC PCI           | **Good**  |  N                     | N                         |
+|Built-in parport(GA-P85-D3)| N         | **Good**               | N                         |
+
+
+
 
 
 ##Installation
