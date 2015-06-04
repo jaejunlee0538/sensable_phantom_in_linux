@@ -76,7 +76,7 @@ But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and 
 
 
 
-Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_32-bit folder. 
+Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder. 
 
 >Originally JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
 
