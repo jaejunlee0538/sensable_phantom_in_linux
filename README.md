@@ -3,24 +3,28 @@
 
 ##Tested System Environments 
 
-#### System Specification
+>####Test at 2015/6/3~4
 
-|           |Specification                              |
+>**OS versions**
+
+>* Ubuntu 14.04 LTS 32bit 3.16.0-38-generic
+* Ubuntu 14.04 LTS 64bit 3.16.0-30-generic
+
+>**Hardware Specification**
+
+>|           |Specification                              |
 |-------    |-----------------------------------------  |
 |CPU        |Intel i5-4690K CPU 3.50GHz x 4             |
 |Memory     |16 GB                                      |
 |GPU        |Gallium 0.4 on NV92                        |
 |MainBoard  |GIGABYTE GA-P85-D3                         |
-|OS         | Ubuntu 14.04 32bit LTS 3.16.0-38-generic  |
 
+>**Communication Devices Compatibility**
 
-####Device Compatibility
-
-|                           |Omni(1394)|Premium 1.5A(Parport)   | Premium 3.0 6DOF(Parport)|
+>|                           |Omni(1394)|Premium 1.5A(Parport)    | Premium 3.0 6DOF(Parport)|
 |---------------------------|:-------:  |:--------------------:  |:------------------------:|
 |NEXT-1394NEC PCI           | **Good**  |  N                     | N                         |
 |Built-in parport(GA-P85-D3)| N         | **Good**               | N                         |
-
 
 
 
@@ -42,10 +46,19 @@ And also download [Sensable_Phantom_libs.tar.gz].
 ----------------------------------------------------------------------
 #####Installing PDD
 Extract files from dowloaded `OpenHapticsAE_Linux_v3_0.zip` file.
+
+>**x86**
 ```sh
 $ cd [DOWNLOAD_DIR]/OpenHapticsAE_Linux_v3_0/OpenHapticsAE_Linux_v3_0/PHANTOM Device Drivers/32-bit
 $ sudo dpkg -i phantomdevicedrivers_4.3-3_i386.deb
 ```
+
+>**x64**
+```sh
+$ cd [DOWNLOAD_DIR]/OpenHapticsAE_Linux_v3_0/OpenHapticsAE_Linux_v3_0/PHANTOM Device Drivers/64-bit
+$ sudo dpkg -i phantomdevicedrivers_4.3-3_amd64.deb
+```
+
 
 Install required packages for PDD.
 ```shell
@@ -65,20 +78,42 @@ But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and 
 
 Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_32-bit folder. 
 
->JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
+>Originally JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
 
+Run the following commands.
+
+>**x86**
 ```shell
 $ cd [DOWNLOAD_DIR]
 $ mkdir Sensable_Phantom_libs && tar -xvf Sensable_Phantom_libs.tar.gz -C Sensable_Phantom_libs
 $ cd Sensable_Phantom_libs/Linux_JUJU_PDD_32-bit
 $ sudo cp libPHANToMIO.so.4.3 /usr/lib
 ```
-Delete broken symbolic links which have links to old libPHANToMIO.so.4.3 file.
+
+>**x64**
+```shell
+$ cd [DOWNLOAD_DIR]
+$ mkdir Sensable_Phantom_libs && tar -xvf Sensable_Phantom_libs.tar.gz -C Sensable_Phantom_libs
+$ cd Sensable_Phantom_libs/Linux_JUJU_PDD_64-bit
+$ sudo cp libPHANToMIO.so.4.3 /usr/lib
+```
+
+If old symbolic links exist, you have to remove them.
+To check it, run this command.
+```shell
+$ find /usr/lib -name "libPHAN*"
+/usr/lib/libPHANToMIO.so.4.3
+/usr/lib/libPHANToMIO.so.4
+/usr/lib/libPHANToMIO.so
+```
+If you have the output same above, delete broken symbolic links. Otherwise, skip this command.
+`libPHANToMIO.so.4` and `libPHANToMIO.so` had symbolic links to old `libPHANToMIO.so.4.3` file.
 ```shell
 $ cd /usr/lib
 $ sudo rm libPHANToMIO.so
 $ sudo rm libPHANToMIO.so.4
 ```
+
 Then create symbolic links with same name.
 ```shell
 $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
@@ -102,9 +137,14 @@ $ /usr/sbin/PHANToMConfiguration
 /usr/sbin/PHANToMConfiguration: error while loading shared libraries: libraw1394.so.8: cannot open shared object file: No such file or directory
 ```
 
+> In x64 Ubuntu, PHANToMConfiguration worked well without the above problem.
+> But when running PHANToMTest, you will encounter `libraw1394.so.8` error.
+> So anyway you have to run the following command.
+
 
 To solve this, create symbolic link for libraw1394.so.8.
 ```shell
+$ cd /usr/lib/x86_64-linux-gnu
 $ sudo ln -s libraw1394.so.11 libraw1394.so.8
 ```
 >@As it seems that PHANToMConfiguration requires `libraw1394.so.8` file even though you would not use 1394 port, you have to run the above command every time you restart your PC.
@@ -148,6 +188,7 @@ If you want to test with **Phantom Premium 1.5(parallel port)** also, keep readi
 
 Run the following commands.
 ```shell
+$ cd /usr/lib/x86_64-linux-gnu
 $ sudo ln -s libraw1394.so.11 libraw1394.so.8
 $ /usr/sbin/PHANToMConfiguration
 ```
