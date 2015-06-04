@@ -119,9 +119,20 @@ Then create symbolic links with same name.
 $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
 $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
 ```
-Replace PHANToMConfiguration file with included in Linux_JUJU_PDD_32-bit folder.
+
+Move to the Sensable_Phantom_libs folder.
+
+>**x86**
 ```shell
 $ cd [DOWNLOAD_DIR]/Sensable_Phantom_libs/Linux_JUJU_PDD_32-bit
+```
+>**x64**
+```shell
+$ cd [DOWNLOAD_DIR]/Sensable_Phantom_libs/Linux_JUJU_PDD_64-bit
+```
+
+Replace PHANToMConfiguration file with included in the folder.
+```shell
 $ sudo cp PHANToMConfiguration /usr/sbin
 ```
 
@@ -143,11 +154,19 @@ $ /usr/sbin/PHANToMConfiguration
 
 
 To solve this, create symbolic link for libraw1394.so.8.
+
+>**x86**
+```shell
+$ cd /usr/lib/i386-linux-gnu
+$ sudo ln -s libraw1394.so.11 libraw1394.so.8
+```
+
+>**x64**
 ```shell
 $ cd /usr/lib/x86_64-linux-gnu
 $ sudo ln -s libraw1394.so.11 libraw1394.so.8
 ```
->@As it seems that PHANToMConfiguration requires `libraw1394.so.8` file even though you would not use 1394 port, you have to run the above command every time you restart your PC.
+
 
 Then try to run PHANToMConfiguration again.
 ```shell
@@ -248,9 +267,9 @@ $ sudo /usr/sbin/PHANToMTest
 
 ![image_premium_1.5_box_test]
 
-Because our control board had been broken, button on the gimbal was not working.
+Because our control board had been broken, I couldn't check button is working.
 
-Excepting the button, everything(encoders, gimbal encoders, force feedback) was working fine.
+Excepting the button, everything(encoders, gimbal encoders, force feedback) was checked and working fine.
 
 ##Test code
 >comming soon...
