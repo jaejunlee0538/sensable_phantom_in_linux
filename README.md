@@ -3,7 +3,7 @@
 
 ##Tested System Environments 
 
->####Test at 2015/6/3~4
+####Test at 2015/6/3~4
 
 >**OS versions**
 
@@ -271,11 +271,70 @@ Because our control board had been broken, I couldn't check button is working.
 
 Excepting the button, everything(encoders, gimbal encoders, force feedback) was checked and working fine.
 
-##Test code
->comming soon...
-
 ##Installing Open Haptics
->comming soon...
+Move to the OpenHaptics folder and install OpenHaptics.
+
+>x86
+```shell
+$ cd [DOWNLOAD_DIR]/OpenHapticsAE_Linux_v3_0/OpenHapticsAE_Linux_v3_0/OpenHaptics-AE 3.0/32-bit
+$ sudo dpkg -i openhaptics-ae_3.0-2_i386.deb
+```
+>x64
+```shell
+$ cd [DOWNLOAD_DIR]/OpenHapticsAE_Linux_v3_0/OpenHapticsAE_Linux_v3_0/OpenHaptics-AE 3.0/64-bit
+$ sudo dpkg -i openhaptics-ae_3.0-2_amd64.deb
+```
+
+Then install `libncurse5-dev` library.
+```shell
+$ sudo apt-get install libncurse5-dev
+```
+
+Add 3DTOUCH path to `/etc/environment` file.
+First open `environment` file with text editor.
+```shell
+$ sudo gedit /etc/environment
+```
+Then add the following line at the end of the file.
+```
+3DTOUCH_BASE=/usr/share/3DTouch
+```
+Then save and close.
+
+##Test code
+After installing OpenHaptics, you can find example codes at `/usr/share/3DTouch/examples`.
+Copy the examples source codes to you want or just use included in this repository.
+Example codes in this repository are exactly same codes which are installed with OpenHaptics.
+
+To create binary executable, move to a example you want. 
+```shell
+$ cd [COPYED_DIR]/sensable_phantom_in_linux/examples/HD/graphics/ParticleWaltz
+$ make
+g++ -W -fexceptions -g -D_DEBUG -Dlinux -o ParticleWaltz ActorDynamics.cpp DynamicsSimulator.cpp ForceModel.cpp helper.cpp main.cpp -lHD -lHDU -lrt -lGL -lGLU -lglut -lncurses
+```
+
+Then you can execute binary.
+```shell
+$ ./ParticleWaltz
+```
+
+HDAPI example(HD/ParticleWaltz)
+[image_example_hd_particle_waltz]
+
+HLAPI example(HL/PointManipulation)
+[image_example_hl_point_manipulation]
+
+
+##### ISSUES
+>Many of sources cannot be compiled with the following message.
+>Messages are slightly different with examples, but similar.
+
+```shell
+/usr/bin/ld: /tmp/ccf1Us6m.o: undefined reference to symbol '_Znwj@@GLIBCXX_3.4'
+//usr/lib/i386-linux-gnu/libstdc++.so.6: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+make: *** [ShapeManipulation] Error 1
+```
 
 ##Miscellaneous
 * Phantom Device Driver library
@@ -316,3 +375,5 @@ Excepting the button, everything(encoders, gimbal encoders, force feedback) was 
 [image_premium_1.5_configuration]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_config.png
 [image_premium_1.5_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_test.png
 [image_premium_1.5_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_box_test.png
+[image_example_hd_particle_waltz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hd_particle_waltz.png
+[image_example_hl_point_manipulation]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hl_point_manipulation.png
