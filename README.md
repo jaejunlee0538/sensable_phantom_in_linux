@@ -26,6 +26,17 @@
 |NEXT-1394NEC PCI           | **Good**  |  N                     | N                         |
 |Built-in parport(GA-P85-D3)| N         | **Good**               | N                         |
 
+####Test at 2015/6/5
+
+>In x86,x64 Ubuntu, Many of sources cannot be compiled with the following message.
+>Messages are slightly different with examples, but similar.
+>
+```shell
+/usr/bin/ld: /tmp/ccf1Us6m.o: undefined reference to symbol '_Znwj@@GLIBCXX_3.4'
+//usr/lib/i386-linux-gnu/libstdc++.so.6: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+make: *** [ShapeManipulation] Error 1
+```
 
 
 
@@ -343,18 +354,6 @@ $ sudo ldconfig
 
 >You can find relevant articles [stkflw_shared_object_error],[stkflw_LD_LIBRARY_PATH],[sudo_echo].
 
-
-
-##### ISSUES
->Many of sources cannot be compiled with the following message.
->Messages are slightly different with examples, but similar.
-
-```shell
-/usr/bin/ld: /tmp/ccf1Us6m.o: undefined reference to symbol '_Znwj@@GLIBCXX_3.4'
-//usr/lib/i386-linux-gnu/libstdc++.so.6: error adding symbols: DSO missing from command line
-collect2: error: ld returned 1 exit status
-make: *** [ShapeManipulation] Error 1
-```
 
 ##Miscellaneous
 * Phantom Device Driver library
