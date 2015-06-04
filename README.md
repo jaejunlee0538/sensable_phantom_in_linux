@@ -327,7 +327,7 @@ $ ./ParticleWaltz
 ![image_example_hl_point_manipulation]
 
 
->If you come accross with similar error message as follow when you run example program again,
+>If you come accross with similar error message as follow when you run example program in x64 Ubuntu,
 ```shell
 $ ./ParticleWaltz 
 ./ParticleWaltz: error while loading shared libraries: libHD.so.3.0: cannot open shared object file: No such file or directory
@@ -339,7 +339,7 @@ $ sudo echo "/usr/lib64" | sudo tee /etc/ld.so.conf.d/open_haptics_libs.conf
 $ sudo ldconfig
 ```
 
->close command window and reopen and try running the examples.
+>close command window and reopen and try running the example again.
 
 >You can find relevant articles [stkflw_shared_object_error],[stkflw_LD_LIBRARY_PATH],[sudo_echo].
 
