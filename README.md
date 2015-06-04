@@ -318,11 +318,11 @@ Then you can execute binary.
 $ ./ParticleWaltz
 ```
 
-HDAPI example(HD/ParticleWaltz)
-[image_example_hd_particle_waltz]
+**HDAPI example(HD/ParticleWaltz)**
+![image_example_hd_particle_waltz]
 
-HLAPI example(HL/PointManipulation)
-[image_example_hl_point_manipulation]
+**HLAPI example(HL/PointManipulation)**
+![image_example_hl_point_manipulation]
 
 
 ##### ISSUES
