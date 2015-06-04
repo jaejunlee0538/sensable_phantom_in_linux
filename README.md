@@ -287,7 +287,7 @@ $ sudo dpkg -i openhaptics-ae_3.0-2_amd64.deb
 
 Then install `libncurse5-dev` library.
 ```shell
-$ sudo apt-get install libncurse5-dev
+$ sudo apt-get install libncurses5-dev
 ```
 
 Add 3DTOUCH path to `/etc/environment` file.
@@ -325,6 +325,24 @@ $ ./ParticleWaltz
 **HLAPI example(HL/PointManipulation)**
 
 ![image_example_hl_point_manipulation]
+
+
+>If you come accross with similar error message as follow when you run example program again,
+```shell
+$ ./ParticleWaltz 
+./ParticleWaltz: error while loading shared libraries: libHD.so.3.0: cannot open shared object file: No such file or directory
+```
+
+>follow this commands.
+```shell
+$ sudo echo "/usr/lib64" | sudo tee /etc/ld.so.conf.d/open_haptics_libs.conf
+$ sudo ldconfig
+```
+
+>close command window and reopen and try running the examples.
+
+>You can find relevant articles [stkflw_shared_object_error],[stkflw_LD_LIBRARY_PATH],[sudo_echo].
+
 
 
 ##### ISSUES
@@ -369,6 +387,10 @@ make: *** [ShapeManipulation] Error 1
 [DSC_forum_libGLw]:http://dsc.sensable.com/forum/topic.asp?TOPIC_ID=1241
 
 [Sensable_Phantom_libs.tar.gz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/Sensable_Phantom_libs.tar.gz
+
+[stkflw_shared_object_error]:http://stackoverflow.com/questions/23991830/libthrift-0-9-1-so-cannot-open-shared-object-file-no-such-file-or-directory
+[stkflw_LD_LIBRARY_PATH]:http://stackoverflow.com/questions/13428910/how-to-set-the-environmental-variable-ld-library-path-in-linux
+[sudo_echo]:https://blogs.oracle.com/joshis/entry/sudo_echo_does_not_work
 
 [image_bios_epp_setup]:http://emojipedia.org/wp-content/uploads/2014/04/1f408-google-android.png
 [image_omni_configuration]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_config.png
