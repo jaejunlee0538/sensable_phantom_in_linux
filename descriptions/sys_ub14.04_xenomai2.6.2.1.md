@@ -20,10 +20,10 @@ It was booted in **Low-Graphic Mode**.
 
 **Communication Devices Compatibility**
 
->|                           |Omni(1394)|Premium 1.5A(Parport)    | Premium 3.0 6DOF(Parport)|
-|---------------------------|:-------:  |:--------------------:  |:------------------------:|
-|NEXT-1394NEC PCI           | **Good**  |  N                     | N                         |
-|Built-in parport(GA-P85-D3)| N         | **Good**               | N                         |
+>|                           |Omni(1394)|Premium 1.5A(Parport)   |
+|---------------------------|:-------:  |:--------------------:  |
+|NEXT-1394NEC PCI           | **Good**  |  None                  | 
+|Built-in parport(GA-P85-D3)| None      | **Good**               | 
 
 **Note**
 
