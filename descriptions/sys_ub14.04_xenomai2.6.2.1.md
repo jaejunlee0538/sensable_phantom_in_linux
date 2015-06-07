@@ -64,31 +64,33 @@ Press any key to quit.
 $ cat /proc/interrupts 
            CPU0       CPU1       CPU2       CPU3       
   0:         42          0          0          0   IO-APIC-edge      timer
-  1:       8266          0          0          0   IO-APIC-edge      i8042
+  1:      12896          0          0          0   IO-APIC-edge      i8042
   5:     500734          0          0          0   IO-APIC-edge      parport0
   8:          1          0          0          0   IO-APIC-edge      rtc0
   9:          0          0          0          0   IO-APIC-fasteoi   acpi
- 16:     505241          0          0          0   IO-APIC-fasteoi   ehci_hcd:usb1, firewire_ohci, nouveau, snd_hda_intel
+ 16:     634039          0          0          0   IO-APIC-fasteoi   ehci_hcd:usb1, firewire_ohci, 
+ nouveau, snd_hda_intel
  19:         28          0          0          0   IO-APIC-fasteoi 
- 23:         92          0          0      40766   IO-APIC-fasteoi   ehci_hcd:usb2
- 41:         82          0          0      20878   PCI-MSI-edge      eth0
- 42:      18322       4488          0       8827   PCI-MSI-edge      ahci
- 43:        727          0          0          0   PCI-MSI-edge      snd_hda_intel
-NMI:        193        117        117        120   Non-maskable interrupts
-LOC:     312497     380739     437997     458985   Local timer interrupts
+ 23:         92          0          0      84589   IO-APIC-fasteoi   ehci_hcd:usb2
+ 41:         82          0          0      41860   PCI-MSI-edge      eth0
+ 42:      23523       4488          0       8827   PCI-MSI-edge      ahci
+ 43:        737          0          0          0   PCI-MSI-edge      snd_hda_intel
+NMI:        361        250        323        293   Non-maskable interrupts
+LOC:     458705     547166     609841     625650   Local timer interrupts
 SPU:          0          0          0          0   Spurious interrupts
-PMI:        193        117        117        120   Performance monitoring interrupts
+PMI:        361        250        323        293   Performance monitoring interrupts
 IWI:          0          0          0          0   IRQ work interrupts
 RTR:          3          0          0          0   APIC ICR read retries
-RES:      34517       5349       4535       2189   Rescheduling interrupts
-CAL:        258        386        418        476   Function call interrupts
-TLB:       9047      11123       9536      10760   TLB shootdowns
+RES:      56046       9013       7727       3902   Rescheduling interrupts
+CAL:        304        427        464        529   Function call interrupts
+TLB:      26808      26184      49605      33639   TLB shootdowns
 TRM:          0          0          0          0   Thermal event interrupts
 THR:          0          0          0          0   Threshold APIC interrupts
 MCE:          0          0          0          0   Machine check exceptions
-MCP:         12         12         12         12   Machine check polls
+MCP:         17         17         17         17   Machine check polls
 ERR:          0
 MIS:          0
+
 ```
 
 ```shell
