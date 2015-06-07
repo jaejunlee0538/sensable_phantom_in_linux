@@ -6,8 +6,6 @@
 
 * Ubuntu 14.04 LTS 32bit 3.4.6-xenomai-2.6.2.1
 
-> NVDIA GTX570 was not compatable with `3.4.6-xenomai-2.6.2.1`.
-It was booted in **Low-Graphic Mode**.
 
 **Hardware Specification**
 
@@ -17,6 +15,8 @@ It was booted in **Low-Graphic Mode**.
 |Memory     |16 GB                                      |
 |GPU        |Gallium 0.4 on NV92                        |
 |MainBoard  |GIGABYTE GA-P85-D3                         |
+
+> NVDIA GTX570 had been installed when OS and Xenomai were installed. But it seemed that GTX570 is not compatable with `3.4.6-xenomai-2.6.2.1` because linux kept being booted in **Low-Graphic Mode**. So we replaced it with `Gallium 0.4 on NV92` and problem was solved.
 
 **Communication Devices Compatibility**
 
