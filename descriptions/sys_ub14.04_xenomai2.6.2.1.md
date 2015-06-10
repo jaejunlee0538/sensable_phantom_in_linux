@@ -4,7 +4,7 @@
 
 **OS versions**
 
-* Ubuntu 14.04 LTS 32bit 3.4.6-xenomai-2.6.2.1
+* Ubuntu 14.04.02 LTS 32bit 3.4.6-xenomai-2.6.2.1
 
 
 **Hardware Specification**
