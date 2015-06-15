@@ -1,43 +1,9 @@
 #Phantom installation in Linux
 >comming soon...
 
-##Tested System Environments 
+##Compatiblity Test
 
-####Test at 2015/6/3~4
-
->**OS versions**
-
->* Ubuntu 14.04 LTS 32bit 3.16.0-38-generic
-* Ubuntu 14.04 LTS 64bit 3.16.0-30-generic
-
->**Hardware Specification**
-
->|           |Specification                              |
-|-------    |-----------------------------------------  |
-|CPU        |Intel i5-4690K CPU 3.50GHz x 4             |
-|Memory     |16 GB                                      |
-|GPU        |Gallium 0.4 on NV92                        |
-|MainBoard  |GIGABYTE GA-P85-D3                         |
-
->**Communication Devices Compatibility**
-
->|                           |Omni(1394)|Premium 1.5A(Parport)    | Premium 3.0 6DOF(Parport)|
-|---------------------------|:-------:  |:--------------------:  |:------------------------:|
-|NEXT-1394NEC PCI           | **Good**  |  N                     | N                         |
-|Built-in parport(GA-P85-D3)| N         | **Good**               | N                         |
-
-####Test at 2015/6/5
-
->In x86,x64 Ubuntu, Many of sources cannot be compiled with the following message.
->Messages are slightly different with examples, but similar.
->
-```shell
-/usr/bin/ld: /tmp/ccf1Us6m.o: undefined reference to symbol '_Znwj@@GLIBCXX_3.4'
-//usr/lib/i386-linux-gnu/libstdc++.so.6: error adding symbols: DSO missing from command line
-collect2: error: ld returned 1 exit status
-make: *** [ShapeManipulation] Error 1
-```
-
+See https://github.com/jaejunlee0538/sensable_phantom_in_linux/wiki/Compatibility-Test-Log 
 
 
 ##Installation
@@ -52,7 +18,7 @@ In this tutorial, we used the following versions.
 
 And also download [Sensable_Phantom_libs.tar.gz].
 
-`Sensable_Phantom_libs.tar.gz` contains library files required for Ubuntu versions higher than 11.04, which are not compatible with PDD in terms of raw1394 package. 
+`Sensable_Phantom_libs.tar.gz` contains library files required for Ubuntu versions higher than 11.04, which are not compatible with PDD in terms of raw1394 package.
 
 ----------------------------------------------------------------------
 #####Installing PDD
@@ -87,7 +53,7 @@ But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and 
 
 
 
-Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder. 
+Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder.
 
 >Originally JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
 
@@ -153,7 +119,7 @@ In this chapter, we will run PHANToMConfiguration program to configure the devic
 
 First, let's run PHANToMConfiguration program.
 
-If you are using Ubuntu version of 11.04 or higher, you might see this error message. 
+If you are using Ubuntu version of 11.04 or higher, you might see this error message.
 ```Shell
 $ /usr/sbin/PHANToMConfiguration
 /usr/sbin/PHANToMConfiguration: error while loading shared libraries: libraw1394.so.8: cannot open shared object file: No such file or directory
@@ -181,15 +147,15 @@ $ sudo ln -s libraw1394.so.11 libraw1394.so.8
 
 Then try to run PHANToMConfiguration again.
 ```shell
-$ /usr/sbin/PHANToMConfiguration 
+$ /usr/sbin/PHANToMConfiguration
 ```
 
 ![image_omni_configuration]
 
-Yet one error message showed up, Phantom omni was working fine. 
+Yet one error message showed up, Phantom omni was working fine.
 
 ```shell
-$ /usr/sbin/PHANToMConfiguration 
+$ /usr/sbin/PHANToMConfiguration
 Warning: Cannot convert string "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1" to type FontStruct
 Warning: Cannot convert string "-adobe-helvetica-bold-r-normal--14-100-100-100-p-82-iso8859-1" to type FontStruct
 PDD Error: raw1394 module not loaded, modprobe raw1394 to correct
@@ -198,7 +164,7 @@ PDD Error: raw1394 module not loaded, modprobe raw1394 to correct
 Let's run PHANToMTest program.
 
 ```shell
-$ /usr/sbin/PHANToMTest 
+$ /usr/sbin/PHANToMTest
 Warning: Cannot convert string "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1" to type FontStruct
 open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or directory
 ```
@@ -206,7 +172,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 
 Click space-bar to move to next step. Encoders, force feedback, 2 buttons were fine.
 
-Box test was also done with no problem. 
+Box test was also done with no problem.
 
 ![image_omni_box_test]
 
@@ -217,15 +183,24 @@ If you want to test with **Phantom Premium 1.5(parallel port)** also, keep readi
 >Built-in parallel port was used for this test.
 
 Run the following commands.
+>**x86**
+```shell
+$ cd /usr/lib/i386-linux-gnu
+$ sudo ln -s libraw1394.so.11 libraw1394.so.8
+$ /usr/sbin/PHANToMConfiguration
+```
+
+>**x64**
 ```shell
 $ cd /usr/lib/x86_64-linux-gnu
 $ sudo ln -s libraw1394.so.11 libraw1394.so.8
 $ /usr/sbin/PHANToMConfiguration
 ```
 
-Manipulate configuration window for your device. 
 
-Test device was Phantom Premium 1.5A equipped with high-resolution gimbal. 
+Manipulate configuration window for your device.
+
+Test device was Phantom Premium 1.5A equipped with high-resolution gimbal.
 
 ![image_premium_1.5_configuration]
 
@@ -237,7 +212,7 @@ First, you have to check your parallel port is running on EPP mode.
 >--[PDD and OH Installation Guide For Linux]--
 
 To check EPP mode, execute the following command.
-In this tutorial, our parport was assigned to `parport0`. 
+In this tutorial, our parport was assigned to `parport0`.
 
 ``` shell
 $ cat /proc/sys/dev/parport/parport0/modes
@@ -258,7 +233,7 @@ If you have no idea about symbolic link, see '[what is link?]'.
 >parport0. To control a PHANTOM attached to a different port, change
 >this symbolic link to point to the appropriate device entry.
 >Additionally, the “modes” file should be linked to /dev/phnepp_modes so
->that the selected port can be opened with the proper settings. 
+>that the selected port can be opened with the proper settings.
 >--[PDD and OH Installation Guide For Linux]--
 
 **To create symbolic links**, run the following commands.
@@ -317,7 +292,7 @@ After installing OpenHaptics, you can find example codes at `/usr/share/3DTouch/
 Copy the examples source codes to you want or just use included in this repository.
 Example codes in this repository are exactly same codes which are installed with OpenHaptics.
 
-To create binary executable, move to a example you want. 
+To create binary executable, move to a example you want.
 ```shell
 $ cd [COPYED_DIR]/sensable_phantom_in_linux/examples/HD/graphics/ParticleWaltz
 $ make
@@ -340,7 +315,7 @@ $ ./ParticleWaltz
 
 >If you come accross with similar error message as follow when you run example program in x64 Ubuntu,
 ```shell
-$ ./ParticleWaltz 
+$ ./ParticleWaltz
 ./ParticleWaltz: error while loading shared libraries: libHD.so.3.0: cannot open shared object file: No such file or directory
 ```
 
@@ -360,10 +335,10 @@ $ sudo ldconfig
     >The PHANTOM Device Driver library is built as a shared object and is installed in
  **/usr/lib/libPHANToMIO.so**
 
-* Phantom Applications 
+* Phantom Applications
     >Administrative applications are installed in **/usr/sbin**
 
-* Phantom Configuration Files 
+* Phantom Configuration Files
     >The default directory for configuration files is
  **/etc/SensAble/PHANToMDeviceDrivers**
 
