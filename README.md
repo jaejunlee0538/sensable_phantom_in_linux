@@ -216,7 +216,7 @@ Before running PHANToMTest, you have to finish additional job.
 First, you have to check your parallel port is running on EPP mode.
 
 >EPP mode communication is required to support this high-speed channel.
->--[PDD and OH Installation Guide For Linux]--
+>--[PDD and OH Installation Guide For Linux][]--
 
 To check EPP mode, execute the following command.
 In this tutorial, our parport was assigned to `parport0`.
@@ -233,7 +233,7 @@ If you find ECP instead of EPP, then go to the BIOS setting and change the paral
 PHANToM does not use parport`x` directly, instead it access the parport through a symbolic link named as `/dev/phnepp`.
 So you have to create symbolic link named `/dev/phnepp` which points to `/dev/parportX`. In this tutorial, `/dev/phnepp` points to `/dev/parport0`.
 
-If you have no idea about symbolic link, see '[what is link?]'.
+If you have no idea about symbolic link, see '[what is link?][]'.
 
 >Note The PHANTOM parallel port driver uses the /dev/phnepp file to
 >access the hardware device. This is installed as a symbolic link to /dev/
@@ -241,7 +241,7 @@ If you have no idea about symbolic link, see '[what is link?]'.
 >this symbolic link to point to the appropriate device entry.
 >Additionally, the “modes” file should be linked to /dev/phnepp_modes so
 >that the selected port can be opened with the proper settings.
->--[PDD and OH Installation Guide For Linux]--
+>--[PDD and OH Installation Guide For Linux][]--
 
 **To create symbolic links**, run the following commands.
 
@@ -334,7 +334,7 @@ $ sudo ldconfig
 
 >close command window and reopen and try running the example again.
 
->You can find relevant articles [stkflw_shared_object_error],[stkflw_LD_LIBRARY_PATH],[sudo_echo].
+>You can find relevant articles [here][stkflw_shared_object_error], [here][stkflw_LD_LIBRARY_PATH], and [here][sudo_echo].
 
 ## Miscellaneous
 
@@ -344,11 +344,11 @@ $ sudo ldconfig
 
 * Phantom Applications
     
->Administrative applications are installed in **/usr/sbin**
+>Administrative applications are installed in **/usr/sbin/**
     
 * Phantom Configuration Files
     >The default directory for configuration files is
- **/etc/SensAble/PHANToMDeviceDrivers**
+ **/etc/SensAble/PHANToMDeviceDrivers/**
 
 * System Language
 
@@ -381,7 +381,7 @@ $ sudo ldconfig
 
 
 [Sensable DSC]:http://dsc.sensable.com/3dtouch/openhaptics_academic_linux/index.asp
-[PDD and OH Installation Guide For Linux]:http://dsc.sensable.com/datafiles/3dtouch/HW_userguide_Linux.pdf
+[PDD and OH Installation Guide For Linux]:http://lars.mec.ua.pt/public/LAR%20Projects/RobotNavigation/2015_MiguelRodrigues/workincopies/lar5/src/bases/phua_haptic/OpenHapticsAE_Linux_v3_0/HW_userguide_Linux.pdf
 [what is link?]:http://www.computerhope.com/unix/uln.htm
 [Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]:http://robotica.unileon.es/mediawiki/index.php/Alvaro-RV-HAPTICROS01
 [DSC_forum_JUJU_PDD]:http://developer.geomagic.com/viewtopic.php?f=2&t=1283
