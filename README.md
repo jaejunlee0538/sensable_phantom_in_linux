@@ -157,7 +157,7 @@ Then try to run PHANToMConfiguration again.
 $ /usr/sbin/PHANToMConfiguration
 ```
 
-![image_omni_configuration](https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_config.png)
+![image_omni_configuration][]
 
 Yet one error message showed up, Phantom omni was working fine.
 
@@ -175,13 +175,13 @@ $ /usr/sbin/PHANToMTest
 Warning: Cannot convert string "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1" to type FontStruct
 open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or directory
 ```
-![image_omni_test](https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_test.png)
+![image_omni_test][]
 
 Click space-bar to move to next step. Encoders, force feedback, 2 buttons were fine.
 
 Box test was also done with no problem.
 
-![image_omni_box_test]
+![image_omni_box_test][]
 
 If you want to test with **Phantom Premium 1.5 (parallel port)** also, keep reading this chapter.
 
@@ -209,7 +209,7 @@ Manipulate configuration window for your device.
 
 Test device was Phantom Premium 1.5A equipped with high-resolution gimbal.
 
-![image_premium_1.5_configuration]
+![image_premium_1.5_configuration][]
 
 Before running PHANToMTest, you have to finish additional job.
 
@@ -228,7 +228,7 @@ PCSPP,TRISTATE,EPP
 
 If you find ECP instead of EPP, then go to the BIOS setting and change the parallel port mode to EPP before going to the next step.
 
-![image_bios_epp_setup]
+![image_bios_epp_setup][]
 
 PHANToM does not use parport`x` directly, instead it access the parport through a symbolic link named as `/dev/phnepp`.
 So you have to create symbolic link named `/dev/phnepp` which points to `/dev/parportX`. In this tutorial, `/dev/phnepp` points to `/dev/parport0`.
@@ -256,9 +256,9 @@ Finally, Phantom Premium 1.5 is ready to be run.
 $ sudo /usr/sbin/PHANToMTest
 ```
 
-![image_premium_1.5_test]
+![image_premium_1.5_test][]
 
-![image_premium_1.5_box_test]
+![image_premium_1.5_box_test][]
 
 Because our control board had been broken, I couldn't check button is working.
 
@@ -313,11 +313,11 @@ $ ./ParticleWaltz
 
 **HDAPI example(HD/ParticleWaltz)**
 
-![image_example_hd_particle_waltz]
+![image_example_hd_particle_waltz][]
 
 **HLAPI example(HL/PointManipulation)**
 
-![image_example_hl_point_manipulation]
+![image_example_hl_point_manipulation][]
 
 
 >If you come across with similar error message as follow when you run example program in x64 Ubuntu,
@@ -374,6 +374,10 @@ $ sudo ldconfig
 
 
 
+[//]: # "======= LIST OF LINKS======="
+
+
+
 
 
 [Sensable DSC]:http://dsc.sensable.com/3dtouch/openhaptics_academic_linux/index.asp
@@ -388,8 +392,22 @@ $ sudo ldconfig
 [stkflw_shared_object_error]:http://stackoverflow.com/questions/23991830/libthrift-0-9-1-so-cannot-open-shared-object-file-no-such-file-or-directory
 [stkflw_LD_LIBRARY_PATH]:http://stackoverflow.com/questions/13428910/how-to-set-the-environmental-variable-ld-library-path-in-linux
 [sudo_echo]:https://blogs.oracle.com/joshis/entry/sudo_echo_does_not_work
+[zip_link]: http://lars.mec.ua.pt/public/LAR%20Projects/Humanoid/2012_PedroCruz/OPENHAPTICS%20v3/Driver%20e%20OpenHaptics%20LINUX/OpenHapticsAE_Linux_v3_0.zip	"Link to PDD and OpenHaptic 3.0 zip"
+[ISSUE#1]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/1
+[ISSUE#3]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/3
+[OHLDE3.4]: https://3dssupport.microsoftcrmportals.com/knowledgebase/article/KA-03284/en-us
 
-[image_bios_epp_setup]:http://emojipedia.org/wp-content/uploads/2014/04/1f408-google-android.png
+
+
+
+
+[//]: # "======= LIST OF IMAGES ======="
+
+
+
+
+
+[image_bios_epp_setup]:https://i.ytimg.com/vi/YfirHQxmKcU/maxresdefault.jpg
 [image_omni_configuration]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_config.png
 [image_omni_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_test.png
 [image_omni_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_box_test.png
@@ -398,9 +416,3 @@ $ sudo ldconfig
 [image_premium_1.5_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_box_test.png
 [image_example_hd_particle_waltz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hd_particle_waltz.png
 [image_example_hl_point_manipulation]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hl_point_manipulation.png
-
-[zip_link]: http://lars.mec.ua.pt/public/LAR%20Projects/Humanoid/2012_PedroCruz/OPENHAPTICS%20v3/Driver%20e%20OpenHaptics%20LINUX/OpenHapticsAE_Linux_v3_0.zip	"Link to PDD and OpenHaptic 3.0 zip"
-[ISSUE#1]:https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/1
-[ISSUE#3]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/3
-[OHLDE3.4]: https://3dssupport.microsoftcrmportals.com/knowledgebase/article/KA-03284/en-us
-
