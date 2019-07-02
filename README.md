@@ -10,7 +10,7 @@ See https://github.com/jaejunlee0538/sensable_phantom_in_linux/wiki/Compatibilit
 
 ##### Download PDD and OpenHaptics
 
-Download PDD (Phantom Device Driver) and Open Haptics from ~~[Sensable DSC][] homepage~~ the link is now broken, you can find the [zip file here][zip_link].
+Download PDD (Phantom Device Driver) and Open Haptics from ~~[Sensable DSC][] homepage~~ the link is now broken, you can find the same [zip file here][zip_link].
 
 In this tutorial, we used the following versions.
 * OpenHapticsAE Linux v3.0
@@ -42,12 +42,10 @@ Install required packages for PDD.
 $ sudo apt-get install freeglut3-dev x11proto-gl-dev libmotif-dev mesa-utils libglw1-mesa-dev
 ```
 
-> If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw][].
-
+>If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw][].
+>
 >`libglw1-mesa-dev` was installed for getting `libGLw*` files.
-But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested (see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev`  because it seem to be compiled with motif support as required by PDD, and it worked. If you encounter any problem with this library, use the included library files in `libGLw.tar.gz` instead (32bits version only).
-
-
+>But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested (see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev`  because it seem to be compiled with motif support as required by PDD, and it worked. If you encounter any problem with this library, use the included library files in `libGLw.tar.gz` instead (32 bits only).
 
 Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder.
 
@@ -81,45 +79,46 @@ $ find /usr/lib -name "libPHAN*"
 ```
 Two possible scenarios from here:
 
-###### Case 1 : three results
+- ###### Case 1 : three results
 
-```shell
-$ find /usr/lib -name "libPHAN*"
-/usr/lib/libPHANToMIO.so.4.3
-/usr/lib/libPHANToMIO.so.4
-/usr/lib/libPHANToMIO.so
-```
+  ```shell
+  $ find /usr/lib -name "libPHAN*"
+  /usr/lib/libPHANToMIO.so.4.3
+  /usr/lib/libPHANToMIO.so.4
+  /usr/lib/libPHANToMIO.so
+  ```
 
-If you have the output same above, you have to delete broken symbolic links, because
-`libPHANToMIO.so.4` and `libPHANToMIO.so` had symbolic links to old `libPHANToMIO.so.4.3` file.
+  If you have the output same above, you have to delete broken symbolic links, because
+  `libPHANToMIO.so.4` and `libPHANToMIO.so` had symbolic links to old `libPHANToMIO.so.4.3` file.
 
-```shell
-$ cd /usr/lib
-$ sudo rm libPHANToMIO.so
-$ sudo rm libPHANToMIO.so.4
-```
+  ```shell
+  $ cd /usr/lib
+  $ sudo rm libPHANToMIO.so
+  $ sudo rm libPHANToMIO.so.4
+  ```
 
-Then, you have to create the missing symbolic links with the same name.
-```shell
-$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
-$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
-```
+  Then, you have to create the missing symbolic links with the same name.
 
-###### Case 2 : one result
+  ```shell
+  $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
+  $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
+  ```
 
-```shell
-$ find /usr/lib -name "libPHAN*"
-/usr/lib/libPHANToMIO.so.4.3
-```
+- ###### Case 2 : one result
 
-If you have the output same above, you have to add the missing symbolic links.
+  ```shell
+  $ find /usr/lib -name "libPHAN*"
+  /usr/lib/libPHANToMIO.so.4.3
+  ```
 
-```shell
-$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
-$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
-```
+  If you have the output same above, you have to add the missing symbolic links.
 
-###### 
+  ```shell
+  $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
+  $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
+  ```
+
+
 
 ## Run PHANToMConfiguration and PHANToMTest
 
@@ -158,7 +157,7 @@ Then try to run PHANToMConfiguration again.
 $ /usr/sbin/PHANToMConfiguration
 ```
 
-![image_omni_configuration]
+![image_omni_configuration](https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_config.png)
 
 Yet one error message showed up, Phantom omni was working fine.
 
@@ -176,7 +175,7 @@ $ /usr/sbin/PHANToMTest
 Warning: Cannot convert string "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1" to type FontStruct
 open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or directory
 ```
-![image_omni_test]
+![image_omni_test](https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_omni_test.png)
 
 Click space-bar to move to next step. Encoders, force feedback, 2 buttons were fine.
 
@@ -363,6 +362,19 @@ $ sudo ldconfig
 
 
 
+## TODO
+
+* Resolve a bug that may appear with build-in parallel port, where EPP is set in bios, but Ubuntu see `EPP,ECP` instead of just `EPP` and so PDD don't work.
+* Check if PDD is working with a [PCI parallel port card][ISSUE#3].
+* Check is phantom programs work with latest Ubuntu versions.
+* Investigate why [example codes cannot compiled][ISSUE#1].
+
+
+
+
+
+
+
 [Sensable DSC]:http://dsc.sensable.com/3dtouch/openhaptics_academic_linux/index.asp
 [PDD and OH Installation Guide For Linux]:http://dsc.sensable.com/datafiles/3dtouch/HW_userguide_Linux.pdf
 [what is link?]:http://www.computerhope.com/unix/uln.htm
@@ -387,4 +399,6 @@ $ sudo ldconfig
 [image_example_hl_point_manipulation]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hl_point_manipulation.png
 
 [zip_link]: http://lars.mec.ua.pt/public/LAR%20Projects/Humanoid/2012_PedroCruz/OPENHAPTICS%20v3/Driver%20e%20OpenHaptics%20LINUX/OpenHapticsAE_Linux_v3_0.zip	"Link to PDD and OpenHaptic 3.0 zip"
+[ISSUE#1]:https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/1
+[ISSUE#3]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/3
 
