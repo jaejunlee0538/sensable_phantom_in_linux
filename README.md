@@ -1,28 +1,28 @@
-#Phantom installation in Linux
+# Phantom installation in Linux
+
 >comming soon...
 
-##Compatiblity Test
+## Compatibility Test
 
 See https://github.com/jaejunlee0538/sensable_phantom_in_linux/wiki/Compatibility-Test-Log 
 
+## Installation
 
-##Installation
-----------------------------------------------------------------------
-#####Download PDD and OpenHaptics
+##### Download PDD and OpenHaptics
 
-Download PDD(Phantom Device Driver) and Open Haptics from [Sensable DSC] homepage.
+Download PDD (Phantom Device Driver) and Open Haptics from ~~[Sensable DSC][] homepage~~ the link is now broken, you can find the [zip file here][zip_link].
 
 In this tutorial, we used the following versions.
 * OpenHapticsAE Linux v3.0
 * Phantom Device Driver 4.3
 
-And also download [Sensable_Phantom_libs.tar.gz].
+And also download [Sensable_Phantom_libs.tar.gz][].
 
 `Sensable_Phantom_libs.tar.gz` contains library files required for Ubuntu versions higher than 11.04, which are not compatible with PDD in terms of raw1394 package.
 
 ----------------------------------------------------------------------
-#####Installing PDD
-Extract files from dowloaded `OpenHapticsAE_Linux_v3_0.zip` file.
+##### Installing PDD
+Extract files from downloaded `OpenHapticsAE_Linux_v3_0.zip` file.
 
 >**x86**
 ```sh
@@ -39,23 +39,19 @@ $ sudo dpkg -i phantomdevicedrivers_4.3-3_amd64.deb
 
 Install required packages for PDD.
 ```shell
-$ sudo apt-get install freeglut3-dev
-$ sydo apt-get install x11proto-gl-dev
-$ sudo apt-get install libmotif-dev
-$ sudo apt-get install mesa-utils
-$ sudo apt-get install libglw1-mesa-dev
+$ sudo apt-get install freeglut3-dev x11proto-gl-dev libmotif-dev mesa-utils libglw1-mesa-dev
 ```
 
-> If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw].
+> If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw][].
 
 >`libglw1-mesa-dev` was installed for getting `libGLw*` files.
-But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested(see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev` and it worked. If you encounter any problem with this library, use the included library files(in `libGLw.tar.gz`) instead.
+But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested (see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev`  because it seem to be compiled with motif support as required by PDD, and it worked. If you encounter any problem with this library, use the included library files in `libGLw.tar.gz` instead (32bits version only).
 
 
 
 Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder.
 
->Originally JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD], but download link is not available now.
+>Originally JUJU_PDD file was uploaded in [DSC_forum_JUJU_PDD][], but download link is not available now.
 
 Run the following commands.
 
@@ -64,6 +60,7 @@ Run the following commands.
 $ cd [DOWNLOAD_DIR]
 $ mkdir Sensable_Phantom_libs && tar -xvf Sensable_Phantom_libs.tar.gz -C Sensable_Phantom_libs
 $ cd Sensable_Phantom_libs/Linux_JUJU_PDD_32-bit
+$ sudo cp PHANToMConfiguration /usr/sbin
 $ sudo cp libPHANToMIO.so.4.3 /usr/lib
 ```
 
@@ -72,50 +69,61 @@ $ sudo cp libPHANToMIO.so.4.3 /usr/lib
 $ cd [DOWNLOAD_DIR]
 $ mkdir Sensable_Phantom_libs && tar -xvf Sensable_Phantom_libs.tar.gz -C Sensable_Phantom_libs
 $ cd Sensable_Phantom_libs/Linux_JUJU_PDD_64-bit
+$ sudo cp PHANToMConfiguration /usr/sbin
 $ sudo cp libPHANToMIO.so.4.3 /usr/lib
 ```
 
 If old symbolic links exist, you have to remove them.
-To check it, run this command.
+To check it, run this command:
+
+```shell
+$ find /usr/lib -name "libPHAN*"
+```
+Two possible scenarios from here:
+
+###### Case 1 : three results
+
 ```shell
 $ find /usr/lib -name "libPHAN*"
 /usr/lib/libPHANToMIO.so.4.3
 /usr/lib/libPHANToMIO.so.4
 /usr/lib/libPHANToMIO.so
 ```
-If you have the output same above, delete broken symbolic links. Otherwise, skip this command.
+
+If you have the output same above, you have to delete broken symbolic links, because
 `libPHANToMIO.so.4` and `libPHANToMIO.so` had symbolic links to old `libPHANToMIO.so.4.3` file.
+
 ```shell
 $ cd /usr/lib
 $ sudo rm libPHANToMIO.so
 $ sudo rm libPHANToMIO.so.4
 ```
 
-Then create symbolic links with same name.
+Then, you have to create the missing symbolic links with the same name.
 ```shell
 $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
 $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
 ```
 
-Move to the Sensable_Phantom_libs folder.
+###### Case 2 : one result
 
->**x86**
 ```shell
-$ cd [DOWNLOAD_DIR]/Sensable_Phantom_libs/Linux_JUJU_PDD_32-bit
-```
->**x64**
-```shell
-$ cd [DOWNLOAD_DIR]/Sensable_Phantom_libs/Linux_JUJU_PDD_64-bit
+$ find /usr/lib -name "libPHAN*"
+/usr/lib/libPHANToMIO.so.4.3
 ```
 
-Replace PHANToMConfiguration file with included in the folder.
+If you have the output same above, you have to add the missing symbolic links.
+
 ```shell
-$ sudo cp PHANToMConfiguration /usr/sbin
+$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
+$ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
 ```
 
+###### 
 
-##Run PHANToMConfiguration and PHANToMTest
-In this chapter, we will run PHANToMConfiguration program to configure the devices and run PHANToMTest to check the device is working well. Firstly, we are going to use **Phantom Omni**(IEEE-1394 interface) and after then try with **Phantom Premium 1.5**(Parallel port)  
+## Run PHANToMConfiguration and PHANToMTest
+
+In this chapter, we will run PHANToMConfiguration program to configure the devices and run PHANToMTest to check the device is working well. Firstly, we are going to use **Phantom Omni** (IEEE-1394 interface) and after then try with **Phantom Premium 1.5** (Parallel port)  
 
 First, let's run PHANToMConfiguration program.
 
@@ -176,7 +184,7 @@ Box test was also done with no problem.
 
 ![image_omni_box_test]
 
-If you want to test with **Phantom Premium 1.5(parallel port)** also, keep reading this chapter.
+If you want to test with **Phantom Premium 1.5 (parallel port)** also, keep reading this chapter.
 
 >**You must read this portion if you have to use parallel port for Phantom.**
 
@@ -329,15 +337,16 @@ $ sudo ldconfig
 
 >You can find relevant articles [stkflw_shared_object_error],[stkflw_LD_LIBRARY_PATH],[sudo_echo].
 
+## Miscellaneous
 
-##Miscellaneous
 * Phantom Device Driver library
     >The PHANTOM Device Driver library is built as a shared object and is installed in
  **/usr/lib/libPHANToMIO.so**
 
 * Phantom Applications
-    >Administrative applications are installed in **/usr/sbin**
-
+    
+>Administrative applications are installed in **/usr/sbin**
+    
 * Phantom Configuration Files
     >The default directory for configuration files is
  **/etc/SensAble/PHANToMDeviceDrivers**
@@ -348,7 +357,8 @@ $ sudo ldconfig
     >So when you run configuration program, you have to type `LANG=en_us /usr/sbin/PHANToMConfiguration`.
     >When running test program, you have to type `LANG=en_us /usr/sbin/PHANToMTest`.
 
-##References
+## References
+
 >comming soon...
 
 
@@ -357,8 +367,8 @@ $ sudo ldconfig
 [PDD and OH Installation Guide For Linux]:http://dsc.sensable.com/datafiles/3dtouch/HW_userguide_Linux.pdf
 [what is link?]:http://www.computerhope.com/unix/uln.htm
 [Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]:http://robotica.unileon.es/mediawiki/index.php/Alvaro-RV-HAPTICROS01
-[DSC_forum_JUJU_PDD]:http://dsc.sensable.com/forum/topic.asp?TOPIC_ID=1283
-[DSC_forum_libGLw]:http://dsc.sensable.com/forum/topic.asp?TOPIC_ID=1241
+[DSC_forum_JUJU_PDD]:http://developer.geomagic.com/viewtopic.php?f=2&t=1283
+[DSC_forum_libGLw]:http://developer.geomagic.com/viewtopic.php?f=2&t=1241
 
 [Sensable_Phantom_libs.tar.gz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/Sensable_Phantom_libs.tar.gz
 
@@ -375,3 +385,6 @@ $ sudo ldconfig
 [image_premium_1.5_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_box_test.png
 [image_example_hd_particle_waltz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hd_particle_waltz.png
 [image_example_hl_point_manipulation]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hl_point_manipulation.png
+
+[zip_link]: http://lars.mec.ua.pt/public/LAR%20Projects/Humanoid/2012_PedroCruz/OPENHAPTICS%20v3/Driver%20e%20OpenHaptics%20LINUX/OpenHapticsAE_Linux_v3_0.zip	"Link to PDD and OpenHaptic 3.0 zip"
+
