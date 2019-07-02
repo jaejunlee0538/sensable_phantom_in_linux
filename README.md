@@ -1,6 +1,6 @@
 # Phantom installation in Linux
 
->comming soon...
+>coming soon...
 
 ## Compatibility Test
 
@@ -264,7 +264,7 @@ Because our control board had been broken, I couldn't check button is working.
 
 Excepting the button, everything(encoders, gimbal encoders, force feedback) was checked and working fine.
 
-##Installing Open Haptics
+## Installing Open Haptics
 Move to the OpenHaptics folder and install OpenHaptics.
 
 >x86
@@ -320,7 +320,7 @@ $ ./ParticleWaltz
 ![image_example_hl_point_manipulation]
 
 
->If you come accross with similar error message as follow when you run example program in x64 Ubuntu,
+>If you come across with similar error message as follow when you run example program in x64 Ubuntu,
 ```shell
 $ ./ParticleWaltz
 ./ParticleWaltz: error while loading shared libraries: libHD.so.3.0: cannot open shared object file: No such file or directory
@@ -358,7 +358,7 @@ $ sudo ldconfig
 
 ## References
 
->comming soon...
+>coming soon...
 
 
 
@@ -368,6 +368,7 @@ $ sudo ldconfig
 * Check if PDD is working with a [PCI parallel port card][ISSUE#3].
 * Check is phantom programs work with latest Ubuntu versions.
 * Investigate why [example codes cannot compiled][ISSUE#1].
+* Check if PDD can work with latest [OpenHaptics for Linux Developer Edition 3.4][OHLDE3.4].
 
 
 
@@ -401,4 +402,5 @@ $ sudo ldconfig
 [zip_link]: http://lars.mec.ua.pt/public/LAR%20Projects/Humanoid/2012_PedroCruz/OPENHAPTICS%20v3/Driver%20e%20OpenHaptics%20LINUX/OpenHapticsAE_Linux_v3_0.zip	"Link to PDD and OpenHaptic 3.0 zip"
 [ISSUE#1]:https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/1
 [ISSUE#3]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/3
+[OHLDE3.4]: https://3dssupport.microsoftcrmportals.com/knowledgebase/article/KA-03284/en-us
 
