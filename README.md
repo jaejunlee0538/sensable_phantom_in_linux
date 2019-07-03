@@ -177,6 +177,62 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 ```
 ![image_omni_test][]
 
+ 
+
+> **If PHANToMTest don't start** and you have this kind of error with GLx instead :
+>
+> ```shell
+> $ /usr/sbin/PHANToMTest
+> Warning: Cannot convert string "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1" to type FontStruct
+> X Error of failed request:  BadValue (integer parameter out of range for operation)
+>   Major opcode of failed request:  155 (GLX)
+>   Minor opcode of failed request:  3 (X_GLXCreateContext)
+>   Value in failed request:  0x0
+>   Serial number of failed request:  585
+>   Current serial number in output stream:  586
+> ```
+>
+> It is because Indirect GLX contexts is not enable in your Xorg configuration, and it is required for PHANToMTest program to run.
+>
+> First, run this command :
+>
+> ```
+> $ locate xorg.conf
+> ```
+>
+> You we'll have something like this :
+>
+> ![locate_xorg_conf][]
+>
+> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the file to edit (if it ATI Radeon graphic card, Nvdia graphic card or just Intel build-in graphics).
+>
+> Open the xorg configuration file (change the command with the proper conf file) :
+>
+> ```
+> $ sudo gedit /usr/share/X11/xorg.conf.d/10-amdgpu.conf
+> ```
+>
+> At the end of the file, add theses lines :
+>
+> ```
+> Section "ServerFlags"
+> 	Option "AllowIndirectGLX" "on"
+> 	Option "IndirectGLX" "on"
+> EndSection
+> ```
+>
+> Save the document, and **reboot** the computer to restart Xorg server with the new configuration.
+>
+> Try to run again PHANToMTest program, it should work now:
+>
+> ```
+> $ /usr/sbin/PHANToMConfiguration
+> ```
+
+
+
+Back to the running PHANToM Test program.
+
 Click space-bar to move to next step. Encoders, force feedback, 2 buttons were fine.
 
 Box test was also done with no problem.
@@ -343,9 +399,9 @@ $ sudo ldconfig
  **/usr/lib/libPHANToMIO.so**
 
 * Phantom Applications
-    
+  
 >Administrative applications are installed in **/usr/sbin/**
-    
+
 * Phantom Configuration Files
     >The default directory for configuration files is
  **/etc/SensAble/PHANToMDeviceDrivers/**
@@ -416,3 +472,5 @@ $ sudo ldconfig
 [image_premium_1.5_box_test]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/phantom_premium_box_test.png
 [image_example_hd_particle_waltz]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hd_particle_waltz.png
 [image_example_hl_point_manipulation]:https://raw.github.com/jaejunlee0538/sensable_phantom_in_linux/master/resources/example_hl_point_manipulation.png
+[locate_xorg_conf]: https://raw.githubusercontent.com/Copper-Bot/sensable_phantom_in_linux/update-readme/resources/locate_xorg_conf.png
+
