@@ -168,7 +168,7 @@ Warning: Cannot convert string "-adobe-helvetica-bold-r-normal--14-100-100-100-p
 PDD Error: raw1394 module not loaded, modprobe raw1394 to correct
 ```
 
-Let's run PHANToMTest program.
+Let's run PHANToMTest program (If you have a GLX issue, just see below).
 
 ```shell
 $ /usr/sbin/PHANToMTest
@@ -204,6 +204,8 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 >
 > ![locate_xorg_conf][]
 >
+> Since recent Xorg server program, there is not an unique`xorg.conf` file anymore, but multiple.
+>
 > In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the file to edit (if it is an ATI Radeon graphic card, Nvdia graphic card or just Intel build-in graphics).
 >
 > Open the xorg configuration file (change the command with the proper conf file) :
@@ -228,6 +230,8 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 > ```
 > $ /usr/sbin/PHANToMConfiguration
 > ```
+>
+> More info about Indirect GLX Issue [here][LINK_GLX_ISSUE].
 
 
 
@@ -452,6 +456,8 @@ $ sudo ldconfig
 [ISSUE#1]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/1
 [ISSUE#3]: https://github.com/jaejunlee0538/sensable_phantom_in_linux/issues/3
 [OHLDE3.4]: https://3dssupport.microsoftcrmportals.com/knowledgebase/article/KA-03284/en-us
+
+[LINK_GLX_ISSUE]: https://askubuntu.com/questions/745135/how-to-enable-indirect-glx-contexts-iglx-in-ubuntu-14-04-lts-with-nvidia-gfx
 
 
 
