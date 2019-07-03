@@ -206,7 +206,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 >
 > Since recent Xorg server program, there is not an unique`xorg.conf` file anymore, but multiple.
 >
-> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the file to edit (if it is an ATI Radeon graphic card, Nvdia graphic card or just Intel build-in graphics).
+> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the right file to edit in the same folder depending of your graphic card.
 >
 > Open the xorg configuration file (change the command with the proper conf file) :
 >
@@ -228,10 +228,10 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 > Try to run again PHANToMTest program, it should work now:
 >
 > ```
-> $ /usr/sbin/PHANToMConfiguration
+> $ /usr/sbin/PHANToMTest
 > ```
 >
-> More info about Indirect GLX Issue [here][LINK_GLX_ISSUE].
+> More info about the Indirect GLX Issue [here][LINK_GLX_ISSUE].
 
 
 
