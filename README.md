@@ -45,7 +45,7 @@ $ sudo apt-get install freeglut3-dev x11proto-gl-dev libmotif-dev mesa-utils lib
 >If you encounter any problem with `libGLw*` file, you have to read [DSC_forum_libGLw][].
 >
 >`libglw1-mesa-dev` was installed for getting `libGLw*` files.
->But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested (see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev`  because it seem to be compiled with motif support as required by PDD, and it worked. If you encounter any problem with this library, use the included library files in `libGLw.tar.gz` instead (32 bits only).
+>But originally, downloading `libGLw.so, libGLw.so.1, libGLw.so.1.0.0` files and copying it to `/usr/lib` directory was suggested (see [here][Phantom Omni Package Installation on ROS Fuerte & ROS Groovy]). Instead, we tried installing `libglw1-mesa-dev`  because it seems to be compiled with motifs support as required by PDD, and it worked. If you encounter any problem with this library, use the included library files in `libGLw.tar.gz` instead (32 bits only).
 
 Extract files from `Sensable_Phantom_libs.tar.gz` and replace libPHANToMIO.so.4.3 file with included in Linux_JUJU_PDD_XX-bit folder.
 
@@ -192,7 +192,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 >   Current serial number in output stream:  586
 > ```
 >
-> It is because Indirect GLX contexts is not enable in your Xorg configuration, and it is required for PHANToMTest program to run.
+> It is because Indirect GLX context is not enabled in your Xorg configuration, and it is required for PHANToMTest program to run.
 >
 > First, run this command :
 >
@@ -204,7 +204,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 >
 > ![locate_xorg_conf][]
 >
-> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the file to edit (if it ATI Radeon graphic card, Nvdia graphic card or just Intel build-in graphics).
+> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the file to edit (if it is an ATI Radeon graphic card, Nvdia graphic card or just Intel build-in graphics).
 >
 > Open the xorg configuration file (change the command with the proper conf file) :
 >
@@ -212,7 +212,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 > $ sudo gedit /usr/share/X11/xorg.conf.d/10-amdgpu.conf
 > ```
 >
-> At the end of the file, add theses lines :
+> At the end of the file, add these lines :
 >
 > ```
 > Section "ServerFlags"
@@ -233,7 +233,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 
 Back to the running PHANToM Test program.
 
-Click space-bar to move to next step. Encoders, force feedback, 2 buttons were fine.
+Click space-bar to move to the next step. Encoders, force feedback, 2 buttons were fine.
 
 Box test was also done with no problem.
 
@@ -267,7 +267,7 @@ Test device was Phantom Premium 1.5A equipped with high-resolution gimbal.
 
 ![image_premium_1.5_configuration][]
 
-Before running PHANToMTest, you have to finish additional job.
+Before running PHANToMTest, you have to finish additional jobs.
 
 First, you have to check your parallel port is running on EPP mode.
 
@@ -350,9 +350,9 @@ Then add the following line at the end of the file.
 ```
 Then save and close.
 
-##Test code
+## Test code
 After installing OpenHaptics, you can find example codes at `/usr/share/3DTouch/examples`.
-Copy the examples source codes to you want or just use included in this repository.
+Copy examples source codes to you want or just use included in this repository.
 Example codes in this repository are exactly same codes which are installed with OpenHaptics.
 
 To create binary executable, move to a example you want.
@@ -376,7 +376,7 @@ $ ./ParticleWaltz
 ![image_example_hl_point_manipulation][]
 
 
->If you come across with similar error message as follow when you run example program in x64 Ubuntu,
+>If you come across with a similar error message as follows when you run example programs in x64 Ubuntu,
 ```shell
 $ ./ParticleWaltz
 ./ParticleWaltz: error while loading shared libraries: libHD.so.3.0: cannot open shared object file: No such file or directory
@@ -422,8 +422,8 @@ $ sudo ldconfig
 
 * Resolve a bug that may appear with build-in parallel port, where EPP is set in bios, but Ubuntu see `EPP,ECP` instead of just `EPP` and so PDD don't work.
 * Check if PDD is working with a [PCI parallel port card][ISSUE#3].
-* Check is phantom programs work with latest Ubuntu versions.
-* Investigate why [example codes cannot compiled][ISSUE#1].
+* Check is phantom programs work with the latest versions of Ubuntu.
+* Investigate why [example codes cannot be compiled][ISSUE#1].
 * Check if PDD can work with latest [OpenHaptics for Linux Developer Edition 3.4][OHLDE3.4].
 
 
