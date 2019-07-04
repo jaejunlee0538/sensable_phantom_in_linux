@@ -114,6 +114,7 @@ Two possible scenarios from here:
   If you have the output same above, you have to add the missing symbolic links.
 
   ```shell
+  $ cd /usr/lib
   $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so
   $ sudo ln -s libPHANToMIO.so.4.3 libPHANToMIO.so.4
   ```
@@ -200,37 +201,35 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 > $ locate xorg.conf
 > ```
 >
-> You we'll have something like this :
+> You will have something like this :
 >
 > ![locate_xorg_conf][]
 >
 > Since recent Xorg server program, there is not an unique`xorg.conf` file anymore, but multiple.
 >
-> In this example, we use an ATI Radeon Graphic card (with an amd gpu). In `/usr/share/X11/xorg.conf.d/` folder, there is one configuration file for amd gpu. In your case, you have to choose correctly the right file to edit in the same folder depending of your graphic card.
->
-> Open the xorg configuration file (change the command with the proper conf file) :
+> Create a new config file for your phantom device in  `/usr/share/X11/xorg.conf.d/` folder and open it, for example with the name `phantom.conf`:
 >
 > ```
-> $ sudo gedit /usr/share/X11/xorg.conf.d/10-amdgpu.conf
+>$ sudo gedit /usr/share/X11/xorg.conf.d/phantom.conf
 > ```
->
-> At the end of the file, add these lines :
+> 
+> Add these lines :
 >
 > ```
-> Section "ServerFlags"
+>Section "ServerFlags"
 > 	Option "AllowIndirectGLX" "on"
 > 	Option "IndirectGLX" "on"
 > EndSection
 > ```
->
-> Save the document, and **reboot** the computer to restart Xorg server with the new configuration.
+> 
+> Save the file, and **reboot** the computer to restart Xorg server with the new configuration.
 >
 > Try to run again PHANToMTest program, it should work now:
 >
 > ```
-> $ /usr/sbin/PHANToMTest
+>$ /usr/sbin/PHANToMTest
 > ```
->
+> 
 > More info about the Indirect GLX Issue [here][LINK_GLX_ISSUE].
 
 
