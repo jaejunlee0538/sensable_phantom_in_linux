@@ -207,13 +207,13 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 >
 > Since recent Xorg server program, there is not an unique`xorg.conf` file anymore, but multiple.
 >
-> Create a new config file for your phantom device in  `/usr/share/X11/xorg.conf.d/` folder and open it, for example with the name `phantom.conf`:
+> To create a new config file for your phantom device in  `/usr/share/X11/xorg.conf.d/` , you can just copy the file `phantom.conf` from the git repo into the folder,  or directly create one, for example with the name `phantom.conf`:
 >
 > ```
 >$ sudo gedit /usr/share/X11/xorg.conf.d/phantom.conf
 > ```
 > 
-> Add these lines :
+> And add these lines :
 >
 > ```
 >Section "ServerFlags"
@@ -234,7 +234,7 @@ open_load_connection: open(PIPE_NAME,O_WRONLY,O_NDELAY): : No such file or direc
 
 
 
-Back to the running PHANToM Test program.
+**Back to the running PHANToM Test program.**
 
 Click space-bar to move to the next step. Encoders, force feedback, 2 buttons were fine.
 
@@ -270,7 +270,7 @@ Test device was Phantom Premium 1.5A equipped with high-resolution gimbal.
 
 ![image_premium_1.5_configuration][]
 
-Before running PHANToMTest, you have to finish additional jobs.
+**Before running PHANToMTest**, you have to finish additional jobs.
 
 First, you have to check your parallel port is running on EPP mode.
 
@@ -289,12 +289,55 @@ If you find ECP instead of EPP, then go to the BIOS setting and change the paral
 
 ![image_bios_epp_setup][]
 
+
+
+**At this stage**, you should launch this command to check the configuration of the parallel port :
+
+```shell
+$ dmesg | grep parp
+```
+
+This will give you the boot-log of the parallel port. Two possible scenarios from here:
+
+- ###### Case 1 : 
+
+  ```shell
+  $ dmesg | grep parp
+  [    8.430242] parport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE,EPP]
+  [    8.524323] lp0: using parport0 (interrupt-driven).
+  ```
+
+  If you have something like this, with only one address (0x378), then PDD will likely work. You can continue to the setup of parport symbolics before running PHANToMTest.
+
+- ###### Case 2 :
+
+  ```shell
+  $ dmesg | grep parp
+  [    6.643385] parport_pc 00:02: reported by Plug and Play ACPI
+  [    6.643447] parport0: PC-style at 0x378 (0x778), irq 7, using FIFO [PCSPP,TRISTATE,COMPAT,EPP,ECP]
+  [    6.748184] lp0: using parport0 (interrupt-driven).
+  ```
+
+  If you have something like this, with two addresses (0x378 and 0x778 in this case), and `using FIFO` , then PDD will likely not work. To resolve this, you have to tell Ubuntu to configure the parallel port with the same address for parallel port and ECR registers (the number in brackets).
+
+  To do so, assuming you just work with one parallel port, the built-in one, just copy the file `parport.conf` from the git repository to`/etc/modprobe.d/` folder with root permission.
+
+  You will have to edit the file if you want to change the default address, add another parallel port, or edit  the configuration for your PCI parallel port card if you have the same issue.
+
+  You can find more info about this [here][PARP_CONF_1] and [here][PARP_CONF_2].
+
+  Reboot the computer, and check the configuration with `dmesg | grep parp`, it should be good now.
+
+
+
+**Back to the configuration** of the parallel port symbolic before running PHANToMTest.
+
 PHANToM does not use parport`x` directly, instead it access the parport through a symbolic link named as `/dev/phnepp`.
 So you have to create symbolic link named `/dev/phnepp` which points to `/dev/parportX`. In this tutorial, `/dev/phnepp` points to `/dev/parport0`.
 
 If you have no idea about symbolic link, see '[what is link?][]'.
 
->Note The PHANTOM parallel port driver uses the /dev/phnepp file to
+><u>NOTE</u> : The PHANTOM parallel port driver uses the /dev/phnepp file to
 >access the hardware device. This is installed as a symbolic link to /dev/
 >parport0. To control a PHANTOM attached to a different port, change
 >this symbolic link to point to the appropriate device entry.
@@ -423,7 +466,6 @@ $ sudo ldconfig
 
 ## TODO
 
-* Resolve a bug that may appear with build-in parallel port, where EPP is set in bios, but Ubuntu see `EPP,ECP` instead of just `EPP` and so PDD don't work.
 * Check if PDD is working with a [PCI parallel port card][ISSUE#3].
 * Check is phantom programs work with the latest versions of Ubuntu.
 * Investigate why [example codes cannot be compiled][ISSUE#1].
@@ -458,7 +500,8 @@ $ sudo ldconfig
 
 [LINK_GLX_ISSUE]: https://askubuntu.com/questions/745135/how-to-enable-indirect-glx-contexts-iglx-in-ubuntu-14-04-lts-with-nvidia-gfx
 
-
+[PARP_CONF_1]: https://ubuntuforums.org/showthread.php?t=2258148
+[PARP_CONF_2]: http://umax1220p.sourceforge.net/trouble.html
 
 
 
